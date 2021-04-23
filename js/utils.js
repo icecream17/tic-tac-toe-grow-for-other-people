@@ -2,6 +2,9 @@
  * Utility function... so far only used once.
  * Checks if two arrays' _values_ are equal
  *
+ * Will throw if the values are not strict equal and
+ * one of the values is not an array
+ *
  * @param {*[]} arr - An array to check
  * @return {boolean} - Whether the two arrays' values are equal
  * @example
@@ -17,7 +20,8 @@ export function valuesEqual (arr1, arr2) {
    }
 
    if (!Array.isArray(arr1) || !Array.isArray(arr2)) {
-      return null
+      console.error("One of the arguments don't pass Array.isArray: %o %o", arr1, arr2)
+      throw new TypeError("One of the arguments don't pass Array.isArray")
    } else if (arr1.length !== arr2.length) {
       return false
    }
